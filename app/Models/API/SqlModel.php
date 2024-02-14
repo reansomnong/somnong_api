@@ -118,6 +118,12 @@ class SqlModel extends Model
         return 10;
     }
 
+    public function get_data($table)
+    {
+        $data = DB::table($table)->get();
+        return $data;
+    }
+
     public function proc_get_data($procedure, array $sql)
     {
         $data = DB::select($procedure, $sql);

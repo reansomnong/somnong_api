@@ -32,7 +32,7 @@ use App\Http\Controllers\API\Somnong\V1\SomnongStaffController;
 use App\Models\api\somnong\somnongStaffInfo;
 
 Route::post('login', [LoginController::class, 'login']);
-Route::post('userlogin', [LoginController::class, 'userlogin']);
+Route::post('testing/{table}', [LoginController::class, 'getData']);
 Route::post('refreshtoken', [LoginController::class, 'refresh']);
 
 Route::prefix('gb')->middleware('auth:api')->group(function () {
