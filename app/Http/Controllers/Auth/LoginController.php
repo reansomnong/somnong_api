@@ -39,7 +39,7 @@ class LoginController extends BaseController
             );
             return $this->sendResponse($array, 'User info retrieved successfully.');
         }
-        return $this->sendResponse($arr, 'User info retrieved successfully.');
+        return $this->sendResponse($arr, 'User can not login.');
     }
 
     public function refresh(RefreshTokenRequest $request)
