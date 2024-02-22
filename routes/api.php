@@ -35,13 +35,13 @@ Route::post('login', [LoginController::class, 'login']);
 Route::get('testing/{table}', [LoginController::class, 'getData']);
 Route::post('refreshtoken', [LoginController::class, 'refresh']);
 
+
 Route::prefix('public')->group(function () {
     Route::get('systems', [ComboController::class, 'systems']);
 });
 
 Route::prefix('gb')->middleware('auth:api')->group(function () {
     Route::post('registerStore', [BranchController::class, 'registerStore']);
-    Route::get('systems', [ComboController::class, 'systems']);
 
     Route::get('combo/{id}', [ComboController::class, 'combo']);
     Route::get('combo_sys/{id}', [ComboController::class, 'combo_sys']);
