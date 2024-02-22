@@ -32,12 +32,11 @@ use App\Http\Controllers\API\Somnong\V1\SomnongStaffController;
 use App\Models\api\somnong\somnongStaffInfo;
 
 Route::post('login', [LoginController::class, 'login']);
-Route::get('testing/{table}', [LoginController::class, 'getData']);
 Route::post('refreshtoken', [LoginController::class, 'refresh']);
-
 
 Route::prefix('public')->group(function () {
     Route::get('systems', [ComboController::class, 'systems']);
+    Route::any('ch_user_email', [CheckingController::class, 'ch_user_email']);
 });
 
 Route::prefix('gb')->middleware('auth:api')->group(function () {
@@ -46,7 +45,6 @@ Route::prefix('gb')->middleware('auth:api')->group(function () {
     Route::get('combo/{id}', [ComboController::class, 'combo']);
     Route::get('combo_sys/{id}', [ComboController::class, 'combo_sys']);
     Route::get('combo_branch/{id}', [ComboController::class, 'combo_branch']);
-    Route::any('ch_user_email', [CheckingController::class, 'ch_user_email']);
     Route::get('comboByBranch/{id}', [ComboController::class, 'comboByBranch']);
 });
 
