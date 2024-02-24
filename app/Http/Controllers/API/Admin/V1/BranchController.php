@@ -60,7 +60,6 @@ class BranchController extends BaseController
         } else {
             $pwd = Hash::make('123456a$');
         }
-
         $results = $SqlModel->proc_get_data('CALL gb_register(?,?,?,?,?,?)',
                             array(
                                 $request->status,

@@ -34,18 +34,23 @@ use App\Models\api\somnong\somnongStaffInfo;
 Route::post('login', [LoginController::class, 'login']);
 Route::post('refreshtoken', [LoginController::class, 'refresh']);
 
-Route::prefix('public')->group(function () {
+Route::prefix('pb')->group(function () {
+    // Get data for public function 
     Route::get('systems', [ComboController::class, 'systems']);
-    Route::any('ch_user_email', [CheckingController::class, 'ch_user_email']);
+    Route::any('user_email', [CheckingController::class, 'user_email']);
+
+    // Register in public function 
+    Route::post('registerStore', [BranchController::class, 'registerStore']);
 });
 
 Route::prefix('gb')->middleware('auth:api')->group(function () {
     Route::post('registerStore', [BranchController::class, 'registerStore']);
-
     Route::get('combo/{id}', [ComboController::class, 'combo']);
     Route::get('combo_sys/{id}', [ComboController::class, 'combo_sys']);
     Route::get('combo_branch/{id}', [ComboController::class, 'combo_branch']);
     Route::get('comboByBranch/{id}', [ComboController::class, 'comboByBranch']);
+
+    Route::any('ch_user_email', [CheckingController::class, 'ch_user_email']);
 });
 
 Route::prefix('admin')->middleware('auth:api')->group(function () {

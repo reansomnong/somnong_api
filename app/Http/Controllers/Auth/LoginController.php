@@ -10,7 +10,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RefreshTokenRequest;
 use App\Http\Requests\Auth\UserloginRequest;
 use App\Http\Resources\Auth\LoginResource;
-use App\Models\API\SqlModel;
+
 use Illuminate\Http\Client\Response;
 use App\Http\Controllers\API\BaseController as BaseController;
 
@@ -39,7 +39,7 @@ class LoginController extends BaseController
             );
             return $this->sendResponse($array, 'User info retrieved successfully.');
         }
-        return $this->sendResponse($arr, 'User can not login.');
+        return $this->sendResponse($arr, 'User info retrieved successfully.');
     }
 
     public function refresh(RefreshTokenRequest $request)
@@ -51,16 +51,10 @@ class LoginController extends BaseController
             'refresh_token' => $request->refresh_token,
         ]);
 
+
         //$data = $response->json();
         //return response()->json($data, $response->getStatusCode());
 
         return $this->sendResponse($response->json(), 'User info retrieved successfully.');
-    }
-
-    public function getData(Request $request,$table)
-    {
-        $SqlModel = new SqlModel();
-        $results = $SqlModel->get_data($table);
-        return $this->sendResponse($results, $SqlModel->gb_msg_retrieved());
     }
 }

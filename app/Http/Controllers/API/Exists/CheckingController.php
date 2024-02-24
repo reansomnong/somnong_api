@@ -40,4 +40,27 @@ class CheckingController extends BaseController
             return $this->sendError($e->errorInfo[2], $e->errorInfo);
         }
     }
+
+    public function user_email(Request $request)
+    {
+         $SqlModel = new SqlModel();
+         $LogActivity= new  LogActivity();
+         $arr=array(
+            $request->input('cmd'),
+            'branch',
+            $request->input('email'),
+            "%"
+         );
+
+        try {
+
+            $results = $SqlModel->proc_get_data('CALL gb_sql_checking(?,?,?,?)',$arr);
+            $arr = json_decode(json_encode($results), true);
+            return $this->sendResponse($results, 'Data retrieved successfully.');
+        
+        } catch (\PDOException $e) {
+            $LogActivity->write_log(['subject'=>'after excute procedure','url'=>$e->errorInfo[2]]);
+            return $this->sendError($e->errorInfo[2], $e->errorInfo);
+        }
+    }
 }
